@@ -1,21 +1,29 @@
 import {
     GraphQLObjectType,
     GraphQLSchema,
-    GraphQLInt
+    GraphQLInt,
+    GraphQLString
 } from 'graphql/type';
 
 let count = 0;
 
-let schema = new GraphQLSchema({
+let schema;
+schema = new GraphQLSchema({
     query: new GraphQLObjectType({
         name: 'RootQueryType',
         fields: {
             count: {
                 type: GraphQLInt,
-                // add the description
                 description: 'The count!',
-                resolve: function() {
+                resolve: () => {
                     return count;
+                }
+            },
+            name: {
+                type: GraphQLString,
+                description: 'This is My name',
+                resolve: () => {
+                    return "Hi my name is Trepix";
                 }
             }
         }
@@ -26,7 +34,7 @@ let schema = new GraphQLSchema({
             updateCount: {
                 type: GraphQLInt,
                 description: 'Updates the count',
-                resolve: function() {
+                resolve: function () {
                     count += 1;
                     return count;
                 }
